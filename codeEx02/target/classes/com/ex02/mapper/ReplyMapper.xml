@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ex02.mapper.ReplyMapper">
+	
+	<select id="getList" resultType="com.ex02.domain.ReplyVO">
+		<![CDATA[
+			SELECT RNO, BNO, REPLY, REPLYER, REPLYDATE, UPDATEDATE FROM TBL_REPLY where RNO > 0
+		]]>
+	</select>
+	
+	<insert id="insert">
+		<![CDATA[
+			INSERT INTO TBL_REPLY (RNO, BNO, REPLY, REPLYER)
+			VALUES(seq_reply.nextval, #{bno}, #{reply}, #{replyer})
+		]]>
+	</insert>
+	
+	<select id="read" resultType="com.ex02.domain.ReplyVO">
+		<![CDATA[
+			SELECT RNO, BNO, REPLY, REPLYER, REPLYDATE, UPDATEDATE FROM TBL_REPLY where RNO = #{rno}
+		]]>
+	</select>
+	
+	<delete id="delete">
+		<![CDATA[
+			DELETE FROM TBL_REPLY WHERE RNO = #{rno}
+		]]>
+	</delete>
+	
+	<update id="update">
+		<![CDATA[
+			UPDATE TBL_REPLY
+			SET 
+				REPLY=#{reply},
+				REPLYER=#{replyer},
+				UPDATEDATE=sysdate
+			WHERE RNO=#{rno}
+		]]>	
+	</update>
+	
+	<select id="getListWithPageing" resultType="com.ex02.domain.ReplyVO">
+		<![CDATA[
+			SELECT 
+			    RNO, BNO, REPLY, REPLYER, REPLYDATE, UPDATEDATE
+			FROM
+			(
+			    SELECT 
+			        /*+INDEX(TBL_REPLY IDX_REPLY) */
+			        ROWNUM RN, RNO, BNO, REPLY, REPLYER, REPLYDATE, UPDATEDATE
+			    FROM TBL_REPLY
+			    WHERE BNO = #{bno}
+			    AND RNO > 0
+			    AND ROWNUM <= #{cri.pageNum} * #{cri.amount}
+			) WHERE RN > (#{cri.pageNum} - 1) * #{cri.amount}  
+			
+		]]>
+	</select>
+	
+	<select id="getCountbyBno" resultType="int">
+		<![CDATA[
+			SELECT 
+	        	COUNT(*) 
+	    	FROM TBL_REPLY WHERE BNO = #{bno}
+    	]]>
+	</select>
+</mapper>  
