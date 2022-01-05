@@ -4,17 +4,14 @@
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
-	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
-	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring 
-	http://mybatis.org/schema/mybatis-spring-1.2.xsd
-		http://www.springframework.org/schema/beans 
-		http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context 
-		http://www.springframework.org/schema/context/spring-context-4.3.xsd
-		http://www.springframework.org/schema/aop 
-		http://www.springframework.org/schema/aop/spring-aop-4.3.xsd
-		http://www.springframework.org/schema/tx 
-		http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring" 
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd 
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd 
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd 
+		http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-4.3.xsd 
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 	
 	<context:annotation-config></context:annotation-config>
 	
@@ -45,11 +42,15 @@
 	<context:component-scan base-package="com.ex02.service" />
 	
 	<mybatis-spring:scan base-package="com.ex04.mapper" />
-	
-	<!-- aop 테스트 용 start-->
 	<context:component-scan base-package="com.ex04.service"></context:component-scan>
-	<context:component-scan base-package="com.ex02.aop"></context:component-scan>	
-	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>
-	<!-- aop 테스트 용 end-->
 	
+	<!-- aop 테스트 용 start-->	
+	<context:component-scan base-package="com.ex02.aop"></context:component-scan>	
+	<aop:aspectj-autoproxy></aop:aspectj-autoproxy>	
+	<!-- aop 테스트 용 end-->
+	<!-- 스케줄러 start -->
+	<context:component-scan base-package="com.ex02.task"></context:component-scan>
+	<!-- 스케줄러 end -->
+	
+	<task:annotation-driven />
 </beans>
