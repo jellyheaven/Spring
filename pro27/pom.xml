@@ -123,7 +123,7 @@
 		    <artifactId>ojdbc6</artifactId>
 		    <version>11.2.0.4</version>
 		</dependency>
-		
+		<!-- 데이타 소스 관련 start-->
 		<!-- https://mvnrepository.com/artifact/commons-beanutils/commons-beanutils -->
 		<dependency>
 		    <groupId>commons-beanutils</groupId>
@@ -144,7 +144,8 @@
 		    <artifactId>cglib-nodep</artifactId>
 		    <version>2.2</version>
 		</dependency>
-		
+		<!-- 데이타 소스 관련 end -->
+		<!-- mybatis 관련 start -->
 		<!-- https://mvnrepository.com/artifact/org.mybatis/mybatis -->
 		<dependency>
 		    <groupId>org.mybatis</groupId>
@@ -158,7 +159,8 @@
 		    <artifactId>mybatis-spring</artifactId>
 		    <version>1.1.0</version>
 		</dependency>
-		
+		<!-- mybatis 관련 end -->
+		<!-- tiles 관련 start -->
 		<!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-core -->
 		<dependency>
 		    <groupId>org.apache.tiles</groupId>
@@ -177,6 +179,7 @@
 		    <artifactId>tiles-servlet</artifactId>
 		    <version>2.2.2</version>
 		</dependency>   
+		<!-- tiles 관련 end -->
 	</dependencies>
 	
     <build>

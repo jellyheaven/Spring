@@ -10,7 +10,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -38,7 +37,8 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value = "/member/listMembers.do" , method = RequestMethod.GET)
 	public ModelAndView listMembers(HttpServletRequest req, HttpServletResponse resp) throws Exception {
 		
-		String viewName = getViewName(req);
+		//String viewName = getViewName(req);
+		String viewName = (String)req.getAttribute("viewName"); //인터셉터 처리
 		
 		List<MemberVO> memberslist = memberService.listMembers();
 		
@@ -69,7 +69,8 @@ public class MemberControllerImpl implements MemberController {
 	
 	@RequestMapping(value = "/member/*Form.do", method =  RequestMethod.GET)
 	public ModelAndView form(@RequestParam(value= "result" , required = false) String result,  HttpServletRequest request, HttpServletResponse response) throws Exception {
-		String viewName = getViewName(request);
+		//String viewName = getViewName(request);
+		String viewName = (String)request.getAttribute("viewName"); //인터셉터 처리		
 		ModelAndView mav = new ModelAndView();
 		mav.addObject("result", result);
 		mav.setViewName(viewName);
